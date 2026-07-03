@@ -44,12 +44,15 @@ def login(request: LoginRequest, db: Session = Depends(get_db), response: Respon
     access_token = create_access_token(data={"sub": user.username})
 
     # Set httpOnly cookie for session persistence (use the injected Response)
+    from app.core.config import get_settings
+    settings = get_settings()
     if response is not None:
         response.set_cookie(
             key="access_token",
             value=access_token,
             httponly=True,
-            samesite="lax"
+            secure=settings.COOKIE_SECURE,
+            samesite=settings.COOKIE_SAMESITE
         )
 
     # Return token in body for backward compatibility but cookie will be used by the client
