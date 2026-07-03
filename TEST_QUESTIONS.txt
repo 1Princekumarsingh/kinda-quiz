@@ -1,0 +1,39 @@
+Question 1
+What is the time complexity of binary search?
+A. O(n)
+B. O(log n)
+C. O(n²)
+D. O(1)
+Answer: B
+
+Question 2
+Which data structure uses LIFO principle?
+A. Queue
+B. Stack
+C. Array
+D. Linked List
+Answer: B
+
+Question 3
+What is the worst-case time complexity of quicksort?
+A. O(n log n)
+B. O(n)
+C. O(n²)
+D. O(log n)
+Answer: C
+
+Question 4
+Which sorting algorithm is stable?
+A. Quicksort
+B. Merge sort
+C. Heap sort
+D. Selection sort
+Answer: B
+
+Question 5
+What is a binary tree?
+A. A tree with at most two children per node
+B. A tree with exactly two children per node
+C. A tree with binary values
+D. A tree with two levels
+Answer: A
