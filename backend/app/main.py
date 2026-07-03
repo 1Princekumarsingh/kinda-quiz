@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api import auth, subjects, chapters, parse, questions, quiz_attempts, statistics, export, quiz_progress
 from app.core.database import engine, Base
+from app.core.config import get_settings
 
 Base.metadata.create_all(bind=engine)
 
@@ -11,9 +12,11 @@ app = FastAPI(
     version="1.0.0"
 )
 
+settings = get_settings()
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost"],
+    allow_origins=settings.cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
