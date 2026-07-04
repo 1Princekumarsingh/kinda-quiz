@@ -218,8 +218,10 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
     const params = new URLSearchParams(currentSearch)
     params.set('session_key', sessionKey)
 
-    navigate(`${currentPath}?${params.toString()}`, { replace: true })
-  }, [progressCreated, isExplicitSessionKey, currentSearch, currentPath, sessionKey, navigate])
+    // Use window.history.replaceState instead of navigate to avoid component remount
+    const newUrl = `${currentPath}?${params.toString()}`
+    window.history.replaceState(null, '', newUrl)
+  }, [progressCreated, isExplicitSessionKey, currentSearch, currentPath, sessionKey])
 
   const progressIsReady =
     (isExplicitSessionKey && !isProgressLoading && !!progressData) ||
