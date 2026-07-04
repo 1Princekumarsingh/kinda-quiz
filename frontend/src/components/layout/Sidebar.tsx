@@ -9,8 +9,8 @@ const navigation = [
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 min-h-[calc(100vh-4rem)]">
-      <nav className="p-4 space-y-1">
+    <aside className="w-full md:w-64 bg-white border-b border-gray-200 md:border-r md:border-b-0 md:min-h-[calc(100vh-4rem)]">
+      <nav className="p-4 space-y-1 md:sticky md:top-16">
         {navigation.map((item) => (
           <NavLink
             key={item.path}

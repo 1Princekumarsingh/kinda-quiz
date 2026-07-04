@@ -471,7 +471,7 @@ export default function QuestionImport() {
                 ? `${editingQuestions.length} Questions`
                 : `${filteredQuestions.length} of ${editingQuestions.length} Questions`}
             </h3>
-            <div className="space-y-4 max-h-[600px] overflow-y-auto">
+            <div className="space-y-4 max-h-[50vh] md:max-h-[60vh] overflow-y-auto">
               {filteredQuestions.map((question) => {
                 const originalIndex = editingQuestions.findIndex(q => q.number === question.number)
                 return (

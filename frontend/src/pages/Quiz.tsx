@@ -420,9 +420,9 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
       />
 
       {/* Main Content */}
-      <div className="flex-1 overflow-auto pb-32">
+      <div className="flex-1 overflow-auto pb-32 lg:pb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Question Area */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
@@ -701,8 +701,8 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
               </div>
             </div>
 
-            {/* Question Palette (Desktop) */}
-            <div className="hidden lg:block">
+            {/* Question Palette (Desktop/Tablet) */}
+            <div className="hidden md:block">
               <div className="sticky top-24">
                 <QuestionPalette
                   state={state}
@@ -714,8 +714,8 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
         </div>
       </div>
 
-      {/* Navigation Bar (Fixed Bottom) */}
-      <div className="fixed bottom-0 left-0 right-0">
+      {/* Navigation Bar (Fixed Bottom on Desktop, Sticky on Mobile) */}
+      <div className="sticky lg:fixed bottom-0 left-0 right-0">
         <QuizNavigationBar
           currentIndex={state.current_question_index}
           totalQuestions={state.questions.length}

@@ -48,7 +48,9 @@ export default function Statistics() {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <div className="text-sm font-medium text-gray-600">Overall Accuracy</div>
           <div className="text-3xl font-bold text-gray-900 mt-2">
-            {stats ? `${stats.overall_accuracy.toFixed(1)}%` : '-%'}
+            {stats && typeof stats.overall_accuracy === 'number'
+              ? `${stats.overall_accuracy.toFixed(1)}%`
+              : '0.0%'}
           </div>
         </div>
       </div>

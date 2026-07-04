@@ -198,44 +198,44 @@ export default function QuizResults() {
           </div>
 
           {/* Metrics Grid */}
-          <div className="p-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div className="p-4 md:p-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
               {/* Total Questions */}
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-3xl font-bold text-gray-900">
+              <div className="text-center p-3 md:p-4 bg-gray-50 rounded-lg">
+                <div className="text-2xl md:text-3xl font-bold text-gray-900">
                   {metrics.totalQuestions}
                 </div>
-                <div className="text-sm text-gray-600 mt-1">
+                <div className="text-xs md:text-sm text-gray-600 mt-1">
                   Total Questions
                 </div>
               </div>
 
               {/* Correct Answers */}
-              <div className="text-center p-4 bg-green-50 rounded-lg">
-                <div className="text-3xl font-bold text-green-700">
+              <div className="text-center p-3 md:p-4 bg-green-50 rounded-lg">
+                <div className="text-2xl md:text-3xl font-bold text-green-700">
                   {metrics.correctAnswers}
                 </div>
-                <div className="text-sm text-green-600 mt-1">
+                <div className="text-xs md:text-sm text-green-600 mt-1">
                   Correct
                 </div>
               </div>
 
               {/* Wrong Answers */}
-              <div className="text-center p-4 bg-red-50 rounded-lg">
-                <div className="text-3xl font-bold text-red-700">
+              <div className="text-center p-3 md:p-4 bg-red-50 rounded-lg">
+                <div className="text-2xl md:text-3xl font-bold text-red-700">
                   {metrics.wrongAnswers}
                 </div>
-                <div className="text-sm text-red-600 mt-1">
+                <div className="text-xs md:text-sm text-red-600 mt-1">
                   Wrong
                 </div>
               </div>
 
               {/* Unanswered */}
-              <div className="text-center p-4 bg-yellow-50 rounded-lg">
-                <div className="text-3xl font-bold text-yellow-700">
+              <div className="text-center p-3 md:p-4 bg-yellow-50 rounded-lg">
+                <div className="text-2xl md:text-3xl font-bold text-yellow-700">
                   {metrics.unansweredQuestions}
                 </div>
-                <div className="text-sm text-yellow-600 mt-1">
+                <div className="text-xs md:text-sm text-yellow-600 mt-1">
                   Unanswered
                 </div>
               </div>

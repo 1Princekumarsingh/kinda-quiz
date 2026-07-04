@@ -19,18 +19,23 @@ def get_dashboard_statistics(
     current_user: User = Depends(get_current_user)
 ):
     # Overall Accuracy
-    # Sum times_correct and times_attempted for all questions belonging to current_user
-    attempted_stats = db.query(
-        func.sum(Question.times_attempted).label("attempted"),
-        func.sum(Question.times_correct).label("correct")
-    ).join(Chapter).join(Subject).filter(
-        Subject.user_id == current_user.id
-    ).first()
-    
-    sum_attempted = attempted_stats.attempted or 0
-    sum_correct = attempted_stats.correct or 0
-    overall_accuracy = (sum_correct / sum_attempted) * 100 if sum_attempted > 0 else 0.0
-    
+    # Compute accuracy from question completion status rather than legacy attempt counters.
+    correct_questions = db.query(Question).join(Chapter).join(Subject).filter(
+        Subject.user_id == current_user.id,
+        Question.status.in_([
+            QuestionStatus.MASTERED,
+            QuestionStatus.REVIEW,
+            QuestionStatus.ALMOST_FORGOT
+        ])
+    ).count()
+
+    attempted_questions = db.query(Question).join(Chapter).join(Subject).filter(
+        Subject.user_id == current_user.id,
+        Question.status != QuestionStatus.NEW
+    ).count()
+
+    overall_accuracy = (correct_questions / attempted_questions) * 100 if attempted_questions > 0 else 0.0
+
     # Total Questions
     total_questions = db.query(Question).join(Chapter).join(Subject).filter(
         Subject.user_id == current_user.id
@@ -97,16 +102,21 @@ def get_chapter_statistics(
         raise HTTPException(status_code=404, detail="Chapter not found")
         
     # Chapter Accuracy
-    attempted_stats = db.query(
-        func.sum(Question.times_attempted).label("attempted"),
-        func.sum(Question.times_correct).label("correct")
-    ).filter(
-        Question.chapter_id == chapter_id
-    ).first()
-    
-    sum_attempted = attempted_stats.attempted or 0
-    sum_correct = attempted_stats.correct or 0
-    accuracy = (sum_correct / sum_attempted) * 100 if sum_attempted > 0 else 0.0
+    correct_questions = db.query(Question).filter(
+        Question.chapter_id == chapter_id,
+        Question.status.in_([
+            QuestionStatus.MASTERED,
+            QuestionStatus.REVIEW,
+            QuestionStatus.ALMOST_FORGOT
+        ])
+    ).count()
+
+    attempted_questions = db.query(Question).filter(
+        Question.chapter_id == chapter_id,
+        Question.status != QuestionStatus.NEW
+    ).count()
+
+    accuracy = (correct_questions / attempted_questions) * 100 if attempted_questions > 0 else 0.0
     
     # Completed Questions
     completed_questions = db.query(Question).filter(

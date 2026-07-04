@@ -78,7 +78,7 @@ export default function QuestionPalette({ state, onQuestionSelect, onClose }: Qu
       </div>
 
       {/* Question Grid */}
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
         {state.questions.map((question, index) => {
           const status = getQuestionStatus(index)
           const isCurrent = index === state.current_question_index
@@ -88,8 +88,8 @@ export default function QuestionPalette({ state, onQuestionSelect, onClose }: Qu
               key={question.id}
               onClick={() => onQuestionSelect(index)}
               className={`
-                w-full aspect-square rounded border-2 font-semibold text-sm
-                transition-all duration-200
+                w-full aspect-square rounded border-2 font-semibold text-xs sm:text-sm
+                transition-all duration-200 min-h-[44px] min-w-[44px]
                 ${getStatusColor(status, isCurrent)}
                 ${isCurrent ? 'ring-2 ring-primary-300 ring-offset-2' : ''}
               `}
