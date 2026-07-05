@@ -89,13 +89,13 @@ export default function QuizHeader({
   }
 
   const getTimeDisplay = () => {
-    const sharedClasses = 'rounded-lg border px-2 py-1.5 shadow-sm text-xs sm:text-sm sm:px-3 sm:py-2 sm:rounded-2xl'
+    const sharedClasses = 'rounded-lg border px-2 py-1.5 shadow-sm text-xs md:text-sm md:px-3 md:py-2 md:rounded-2xl lg:px-4 lg:py-2.5'
 
     if (timer_mode === 'unlimited') {
       return (
         <div className={`${sharedClasses} border-slate-200 bg-slate-50`}>
-          <div className="text-[9px] font-semibold uppercase tracking-wide text-slate-500 sm:text-[11px]">Elapsed</div>
-          <div className="font-mono text-sm font-semibold text-slate-900 sm:text-lg">{formatTime(elapsed)}</div>
+          <div className="text-[9px] font-semibold uppercase tracking-wide text-slate-500 md:text-[11px]">Elapsed</div>
+          <div className="font-mono text-sm font-semibold text-slate-900 md:text-lg lg:text-xl">{formatTime(elapsed)}</div>
         </div>
       )
     }
@@ -106,8 +106,8 @@ export default function QuizHeader({
 
       return (
         <div className={`${sharedClasses} ${tone} ${isLowTime ? 'animate-pulse' : ''}`}>
-          <div className="text-[9px] font-semibold uppercase tracking-wide sm:text-[11px]">Q-timer</div>
-          <div className="font-mono text-sm font-semibold sm:text-lg">{formatTime(questionRemaining)}</div>
+          <div className="text-[9px] font-semibold uppercase tracking-wide md:text-[11px]">Q-timer</div>
+          <div className="font-mono text-sm font-semibold md:text-lg lg:text-xl">{formatTime(questionRemaining)}</div>
         </div>
       )
     }
@@ -119,10 +119,10 @@ export default function QuizHeader({
 
       return (
         <div className={`${sharedClasses} ${tone} ${isLowTime ? 'animate-pulse' : ''}`}>
-          <div className="text-[9px] font-semibold uppercase tracking-wide sm:text-[11px]">Time left</div>
-          <div className="font-mono text-sm font-semibold sm:text-lg">{formatTime(remaining)}</div>
+          <div className="text-[9px] font-semibold uppercase tracking-wide md:text-[11px]">Time left</div>
+          <div className="font-mono text-sm font-semibold md:text-lg lg:text-xl">{formatTime(remaining)}</div>
           {showWarning && isLowTime && (
-            <div className="text-[8px] font-medium sm:text-[11px]">Hurry up</div>
+            <div className="text-[8px] font-medium md:text-[11px]">Hurry up</div>
           )}
         </div>
       )
@@ -142,12 +142,12 @@ export default function QuizHeader({
 
   return (
     <div className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur">
-      <div className="mx-auto max-w-7xl px-3 py-2 sm:px-6 sm:py-3 lg:px-8">
-        <div className="flex items-start justify-between gap-2 sm:gap-3">
+      <div className="mx-auto max-w-7xl px-3 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4">
+        <div className="flex items-start justify-between gap-2 md:gap-3 lg:gap-4">
           <div className="min-w-0 flex-1">
-            <h1 className="text-base font-semibold text-slate-900 sm:text-lg">{title}</h1>
-            <div className="mt-1 flex flex-wrap items-center gap-1.5 sm:gap-2">
-              <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide sm:px-2.5 sm:py-1 sm:text-[11px] ${
+            <h1 className="text-base font-semibold text-slate-900 md:text-lg lg:text-xl">{title}</h1>
+            <div className="mt-1 flex flex-wrap items-center gap-1.5 md:gap-2">
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide md:px-2.5 md:py-1 md:text-[11px] ${
                 mode === 'practice'
                   ? 'bg-sky-100 text-sky-700'
                   : 'bg-violet-100 text-violet-700'
@@ -155,30 +155,30 @@ export default function QuizHeader({
                 {mode === 'practice' ? 'Practice' : 'Exam'}
               </span>
               {timer_mode !== 'unlimited' && (
-                <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-700 sm:px-2.5 sm:py-1 sm:text-[11px]">
+                <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-700 md:px-2.5 md:py-1 md:text-[11px]">
                   {timer_mode === 'per_question' ? 'Timed' : 'Timed test'}
                 </span>
               )}
             </div>
           </div>
 
-          <div className="hidden sm:block">
+          <div className="hidden md:block">
             {getTimeDisplay()}
           </div>
 
           <button
             onClick={handleExit}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 transition-colors hover:bg-slate-50 sm:h-10 sm:w-auto sm:gap-2 sm:px-3 sm:py-2 sm:text-sm sm:font-semibold"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 transition-colors hover:bg-slate-50 md:h-10 md:w-auto md:gap-2 md:px-3 md:py-2 md:text-sm md:font-semibold lg:h-11 lg:px-4"
             title="Save & Exit"
           >
-            <svg className="h-5 w-5 flex-shrink-0 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-5 w-5 flex-shrink-0 md:h-4 md:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
-            <span className="hidden sm:inline">Save & Exit</span>
+            <span className="hidden md:inline">Save & Exit</span>
           </button>
         </div>
 
-        <div className="mt-2 flex justify-center sm:hidden">
+        <div className="mt-2 flex justify-center md:hidden">
           {getTimeDisplay()}
         </div>
       </div>
