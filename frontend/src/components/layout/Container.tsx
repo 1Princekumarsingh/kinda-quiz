@@ -74,7 +74,7 @@ export function Container({
         mx-auto
         lg:mx-auto
         ${maxWidthClasses[size]}
-        px-4 md:px-6 md:landscape:px-5 lg:px-8 xl:px-10
+        px-2 md:px-3 lg:px-4 xl:px-5
         overflow-x-hidden
         transition-all duration-200
         lg:mx-auto
