@@ -78,7 +78,7 @@ export default function QuestionPalette({ state, onQuestionSelect, onClose }: Qu
         })}
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-2 border-t border-slate-200 pt-3 text-xs">
+      <div className="mt-4 flex flex-col gap-2 border-t border-slate-200 pt-3 text-xs">
         <div className="flex justify-between">
           <span className="text-slate-600">Total:</span>
           <span className="font-semibold text-slate-900">{state.questions.length}</span>
