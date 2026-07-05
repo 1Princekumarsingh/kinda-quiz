@@ -29,7 +29,7 @@ function createFreshState(config: QuizConfig, questions: QuizQuestion[]): QuizSt
 }
 
 function normalizeState(state: QuizState, config: QuizConfig, questions: QuizQuestion[]): QuizState {
-  const normalizedQuestions = state.questions?.length ? state.questions : questions
+  const normalizedQuestions = questions?.length ? questions : (state.questions?.length ? state.questions : [])
   const maxIndex = Math.max(normalizedQuestions.length - 1, 0)
   const currentIndex = Number.isFinite(state.current_question_index)
     ? Math.min(Math.max(state.current_question_index, 0), maxIndex)

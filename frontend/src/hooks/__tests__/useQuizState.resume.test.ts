@@ -62,4 +62,22 @@ describe('useQuizState resume restoration', () => {
     expect(result.current.state.is_paused).toBe(true)
     expect(result.current.state.is_completed).toBe(false)
   })
+
+  it('prefers fresh API questions over stale saved question records', () => {
+    const staleState = buildSavedState()
+    staleState.questions = questions.map((question) => ({
+      ...question,
+      explanation: null
+    }))
+
+    const freshQuestions = questions.map((question, index) => ({
+      ...question,
+      explanation: `Explanation for question ${index + 1}`
+    }))
+
+    const { result } = renderHook(() => useQuizState(config, freshQuestions, staleState))
+
+    expect(result.current.state.questions[0].explanation).toBe('Explanation for question 1')
+    expect(result.current.state.questions[1].explanation).toBe('Explanation for question 2')
+  })
 })
