@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { QuizState, QuizAnswer, QuizQuestion, QuizConfig, ConfidenceLevel } from '@/types/quiz'
 
 function createInitialAnswers(questions: QuizQuestion[]): Map<number, QuizAnswer> {
@@ -48,17 +48,7 @@ export function useQuizState(initialConfig: QuizConfig, questions: QuizQuestion[
     return initialState ? normalizeState(initialState, initialConfig, questions) : createFreshState(initialConfig, questions)
   })
 
-  // Only run effect if there's NO initial state to restore
-  // This prevents resetting restored quiz progress
-  useEffect(() => {
-    // Skip entirely if we have initialState - it's already set in useState initializer
-    if (initialState) {
-      return
-    }
-    
-    // Only create fresh state if there's no initialState
-    setState(createFreshState(initialConfig, questions))
-  }, [initialConfig, questions, initialState])
+  // NO useEffect - state is initialized correctly in useState and should never be reset
 
   const clearSavedState = useCallback(() => {
     // Progress is persisted via backend storage rather than localStorage.
