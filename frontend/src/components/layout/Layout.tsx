@@ -10,7 +10,7 @@ export default function Layout() {
       <Navbar />
       <div className="flex flex-col md:flex-row">
         <Sidebar />
-        <main id="main-content" className="flex-1 px-3 py-3 sm:px-4 md:px-4 lg:px-5 lg:py-5" tabIndex={-1}>
+        <main id="main-content" className="flex-1 px-2 py-3 sm:px-3 md:px-3 lg:px-3 lg:py-5" tabIndex={-1}>
           <Outlet />
         </main>
       </div>
