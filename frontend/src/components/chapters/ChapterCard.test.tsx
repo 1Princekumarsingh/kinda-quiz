@@ -28,8 +28,9 @@ describe('ChapterCard', () => {
       />
     )
 
-    const card = screen.getAllByText('Cell Biology')[0].closest('section')
-    expect(card?.querySelector('.hidden.lg\\:flex')).toBeTruthy()
-    expect(card?.querySelector('.lg\\:items-center')).toBeTruthy()
+    const card = screen.getByText('Cell Biology').closest('section')
+    expect(card).toBeTruthy()
+    expect(card).toHaveTextContent('Progress')
+    expect(card).toHaveTextContent('Start quiz')
   })
 })

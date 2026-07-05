@@ -61,8 +61,8 @@ export default function ChapterCard({ chapter, progress, onEdit, onDelete, onImp
       hoverable
       className="group h-full border border-slate-200/80 bg-white/90 p-3 shadow-sm transition-all duration-200 sm:p-4 md:p-4 lg:p-6 xl:p-8"
     >
-      <div className="flex flex-col gap-3 md:hidden">
-        <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="truncate text-lg font-semibold leading-tight text-slate-900 md:text-xl lg:text-2xl">{chapter.name}</h3>
