@@ -479,7 +479,7 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
             {/* Question Area */}
             <div className="lg:col-span-2 lg:max-w-[800px] lg:justify-self-center">
               <div
-                className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm sm:p-6 md:p-7 lg:p-8 touch-manipulation select-none-safe"
+                className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm sm:p-6 md:p-7 lg:p-8 touch-manipulation select-none-safe max-h-[calc(100vh-16rem)] overflow-y-auto"
                 style={transformStyle}
                 onTouchStart={(event) => {
                   longPressHandlers.onTouchStart(event)
