@@ -63,7 +63,7 @@ export function Container({
     sm: 'max-w-full lg:max-w-[640px] xl:max-w-[640px]',
     md: 'max-w-full lg:max-w-[768px] xl:max-w-[960px]',
     lg: 'max-w-full lg:max-w-[1024px] xl:max-w-[1200px]',
-    xl: 'max-w-full md:max-w-[920px] lg:max-w-[1380px] xl:max-w-[1400px]',
+    xl: 'max-w-full',
     full: 'max-w-full lg:max-w-none xl:max-w-none',
   }
 
