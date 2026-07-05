@@ -12,7 +12,7 @@ interface DesktopNavProps {
 
 export default function DesktopNav({ navigationItems, currentPath }: DesktopNavProps) {
   return (
-    <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex">
+    <nav aria-label="Primary navigation" className="hidden items-center gap-1">
       {navigationItems.map((item) => (
         <NavLink
           key={item.path}
