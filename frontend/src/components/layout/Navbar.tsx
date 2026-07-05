@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import DesktopNav from './DesktopNav'
 import MobileMenu from './MobileMenu'
@@ -37,7 +37,13 @@ export default function Navbar() {
               </svg>
             </button>
 
-            <span className="text-xl font-semibold tracking-tight text-primary-600">RecallX</span>
+            <Link 
+              to="/dashboard" 
+              className="text-xl font-semibold tracking-tight text-primary-600 transition-colors hover:text-primary-700"
+              aria-label="Go to dashboard"
+            >
+              RecallX
+            </Link>
           </div>
 
           <div className="hidden md:landscape:flex md:landscape:items-center md:landscape:gap-4">

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, Link } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 
 interface NavigationItem {
@@ -68,7 +68,14 @@ export default function MobileMenu({ isOpen, onClose, navigationItems }: MobileM
         className="absolute inset-y-0 left-0 w-72 max-w-[85vw] bg-white shadow-xl transition-transform duration-250 ease-out animate-[slideInLeft_250ms_ease-out]"
       >
         <div className="flex items-center justify-between border-b border-gray-200 px-4 py-4">
-          <span className="text-lg font-semibold text-gray-900">RecallX</span>
+          <Link 
+            to="/dashboard" 
+            onClick={onClose}
+            className="text-lg font-semibold text-gray-900 transition-colors hover:text-primary-600"
+            aria-label="Go to dashboard"
+          >
+            RecallX
+          </Link>
           <button
             type="button"
             onClick={onClose}
