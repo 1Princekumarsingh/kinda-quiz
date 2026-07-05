@@ -17,6 +17,7 @@ import { deserializeQuizState, serializeQuizState } from '@/lib/quizProgress'
 import QuizHeader from '@/components/quiz/QuizHeader'
 import QuizNavigationBar from '@/components/quiz/QuizNavigationBar'
 import QuestionPalette from '@/components/quiz/QuestionPalette'
+import PracticeFeedbackExplanation from '@/components/quiz/PracticeFeedbackExplanation'
 
 function buildSessionKey(config: QuizConfig): string {
   return [
@@ -158,7 +159,6 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
   
   const [showPalette, setShowPalette] = useState(false)
   const [showFeedback, setShowFeedback] = useState(false)
-  const [isExplanationOpen, setIsExplanationOpen] = useState(false)
   const [statusUpdateError, setStatusUpdateError] = useState<string | null>(null)
   const debounceClick = useDebounceClick()
   const restoredQuizState = useMemo(
@@ -271,7 +271,6 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
   // Reset feedback and explanation when question changes
   useEffect(() => {
     setShowFeedback(false)
-    setIsExplanationOpen(false)
     setStatusUpdateError(null)
   }, [state.current_question_index])
 
@@ -628,36 +627,10 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
                   })}
                 </div>
 
-                {/* Collapsible Explanation Box */}
-                {config.mode === 'practice' && showFeedback && currentQuestion.explanation && (
-                  <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-white">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        debounceClick(() => {
-                          setIsExplanationOpen(!isExplanationOpen)
-                          triggerHaptic('light')
-                        })
-                      }}
-                      className="flex w-full items-center justify-between bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
-                    >
-                      <span>Explanation</span>
-                      <svg
-                        className={`w-5 h-5 transform transition-transform ${isExplanationOpen ? 'rotate-180' : ''}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                    {isExplanationOpen && (
-                      <div className="border-t border-slate-200 bg-white p-4 text-sm leading-6 text-slate-700">
-                        {currentQuestion.explanation}
-                      </div>
-                    )}
-                  </div>
-                )}
+                <PracticeFeedbackExplanation
+                  visible={config.mode === 'practice' && showFeedback}
+                  explanation={currentQuestion.explanation}
+                />
 
                 {/* Clear Answer */}
                 {currentAnswer.selected_answer && !showFeedback && (

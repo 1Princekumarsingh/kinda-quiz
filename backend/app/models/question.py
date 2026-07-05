@@ -26,6 +26,7 @@ class Question(Base):
     option_c = Column(String, nullable=False)
     option_d = Column(String, nullable=False)
     correct_answer = Column(String(1), nullable=False)  # A, B, C, or D
+    explanation = Column(String, nullable=True)
     status = Column(SQLEnum(QuestionStatus), default=QuestionStatus.NEW, nullable=False)
     times_attempted = Column(Integer, default=0)
     times_correct = Column(Integer, default=0)
@@ -47,6 +48,7 @@ class Question(Base):
             "option_c": self.option_c,
             "option_d": self.option_d,
             "correct_answer": self.correct_answer,
+            "explanation": self.explanation,
             "status": self.status.value if self.status else "NEW",
             "times_attempted": self.times_attempted,
             "times_correct": self.times_correct,

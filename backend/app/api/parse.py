@@ -4,7 +4,7 @@ from app.core.security import get_current_user
 from app.models.user import User
 from app.utils.question_parser import parse_questions_from_text
 from app.utils.docx_parser import parse_questions_from_docx, DocxParseError
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 router = APIRouter(prefix="/parse", tags=["parse"])
 
@@ -14,12 +14,27 @@ class ParseTextRequest(BaseModel):
     text: str
 
 
+class ParsedQuestionResponse(BaseModel):
+    """Response model for a single parsed question"""
+    number: int
+    question_text: str
+    option_a: str
+    option_b: str
+    option_c: str
+    option_d: str
+    correct_answer: str
+    explanation: Optional[str] = None
+    is_valid: bool
+    errors: list[dict]
+    warnings: list[dict]
+
+
 class ParseResponse(BaseModel):
     """Response model for parsing results"""
     total_questions: int
     valid_questions: int
     invalid_questions: int
-    questions: list
+    questions: list[ParsedQuestionResponse]
 
 
 @router.post("/text", response_model=ParseResponse)

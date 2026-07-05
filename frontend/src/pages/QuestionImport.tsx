@@ -6,6 +6,8 @@ import { questionsApi } from '@/api/questions'
 import Button from '@/components/common/Button'
 import ConfirmDialog from '@/components/common/ConfirmDialog'
 import Input from '@/components/common/Input'
+import ImportExplanationBlock from '@/components/import/ImportExplanationBlock'
+import ImportFormatGuide from '@/components/import/ImportFormatGuide'
 import { useToast } from '@/contexts/ToastContext'
 import { ParsedQuestion } from '@/types/parse'
 import { QuestionBase } from '@/types/question'
@@ -265,7 +267,8 @@ export default function QuestionImport() {
       option_b: q.option_b,
       option_c: q.option_c,
       option_d: q.option_d,
-      correct_answer: q.correct_answer
+      correct_answer: q.correct_answer,
+      explanation: q.explanation ?? null
     }))
 
     setValidationNotice(null)
@@ -346,10 +349,11 @@ export default function QuestionImport() {
         {activeTab === 'text' && (
           <div className="p-6 space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="question-import-text" className="block text-sm font-medium text-gray-700 mb-2">
                 Paste your questions here (in standardized format)
               </label>
               <textarea
+                id="question-import-text"
                 value={textInput}
                 onChange={(e) => setTextInput(e.target.value)}
                 placeholder={`Question 1\nWhat is the time complexity of binary search?\nA. O(n)\nB. O(log n)\nC. O(n²)\nD. O(1)\nAnswer: B\n\nQuestion 2\n...`}
@@ -511,6 +515,11 @@ export default function QuestionImport() {
                           <p className="mt-2 text-sm text-slate-600">
                             {question.question_text.trim() || 'No question text yet'}
                           </p>
+                          {question.explanation && (
+                            <div className="mt-3">
+                              <ImportExplanationBlock explanation={question.explanation} />
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="flex items-center gap-2 self-start">
@@ -624,6 +633,8 @@ export default function QuestionImport() {
                           </div>
                         )}
 
+                        <ImportExplanationBlock explanation={question.explanation} />
+
                         {question.warnings.length > 0 && (
                           <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-3">
                             <div className="text-xs font-semibold uppercase tracking-wide text-amber-700">Notes</div>
@@ -665,27 +676,7 @@ export default function QuestionImport() {
       )}
 
       {/* Format Guide */}
-      <div className="bg-blue-50 rounded-lg border border-blue-200 p-6">
-        <h3 className="text-lg font-semibold text-blue-900 mb-3">Standardized Format Guide</h3>
-        <div className="bg-white rounded p-4 font-mono text-sm text-gray-900 space-y-2">
-          <div>Question 1</div>
-          <div>What is the time complexity of binary search?</div>
-          <div>A. O(n)</div>
-          <div>B. O(log n)</div>
-          <div>C. O(n²)</div>
-          <div>D. O(1)</div>
-          <div>Answer: B</div>
-          <div className="pt-2">&nbsp;</div>
-          <div>Question 2</div>
-          <div>...</div>
-        </div>
-        <ul className="mt-4 space-y-1 text-sm text-blue-800">
-          <li>• Each question must have a number (Question 1, Question 2, etc.)</li>
-          <li>• Four options labeled A, B, C, D</li>
-          <li>• One correct answer (Answer: A, B, C, or D)</li>
-          <li>• Separate questions with blank lines</li>
-        </ul>
-      </div>
+      <ImportFormatGuide />
 
       <ConfirmDialog
         isOpen={pendingDeleteIndex !== null}

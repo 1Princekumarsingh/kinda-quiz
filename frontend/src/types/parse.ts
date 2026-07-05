@@ -4,6 +4,11 @@ export interface ValidationError {
   line: number | null
 }
 
+export type ValidationErrorType =
+  | 'empty_explanation'
+  | 'explanation_too_long'
+  | string
+
 export interface ParsedQuestion {
   number: number
   question_text: string
@@ -12,6 +17,7 @@ export interface ParsedQuestion {
   option_c: string
   option_d: string
   correct_answer: string
+  explanation?: string | null
   is_valid: boolean
   errors: ValidationError[]
   warnings: ValidationError[]

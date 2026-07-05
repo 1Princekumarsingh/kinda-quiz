@@ -11,6 +11,7 @@ class QuestionBase(BaseModel):
     option_c: str = Field(..., min_length=1)
     option_d: str = Field(..., min_length=1)
     correct_answer: str = Field(..., pattern="^[A-D]$")
+    explanation: Optional[str] = None
 
     @field_validator('question_text', 'option_a', 'option_b', 'option_c', 'option_d')
     @classmethod

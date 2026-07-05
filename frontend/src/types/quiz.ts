@@ -7,7 +7,7 @@ export interface QuizQuestion {
   option_c: string
   option_d: string
   correct_answer: string
-  explanation?: string
+  explanation?: string | null
 }
 
 export type QuizMode = 'practice' | 'exam'

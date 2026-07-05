@@ -6,6 +6,7 @@ export interface QuestionBase {
   option_c: string
   option_d: string
   correct_answer: string
+  explanation?: string | null
 }
 
 export interface QuestionCreate extends QuestionBase {

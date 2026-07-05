@@ -38,8 +38,9 @@ class ParsedQuestion:
     option_c: str
     option_d: str
     correct_answer: str
-    errors: List[ValidationError]
-    warnings: List[ValidationError]
+    explanation: Optional[str] = None
+    errors: List[ValidationError] = None
+    warnings: List[ValidationError] = None
     
     @property
     def is_valid(self) -> bool:
@@ -56,6 +57,7 @@ class ParsedQuestion:
             'option_c': self.option_c,
             'option_d': self.option_d,
             'correct_answer': self.correct_answer,
+            'explanation': self.explanation,
             'is_valid': self.is_valid,
             'errors': [{'type': e.type, 'message': e.message, 'line': e.line} for e in self.errors],
             'warnings': [{'type': w.type, 'message': w.message, 'line': w.line} for w in self.warnings]
@@ -73,6 +75,7 @@ class QuestionParser:
     )
     OPTION_PATTERN = re.compile(r'^([A-D])\.\s*(.+)$', re.IGNORECASE)
     ANSWER_PATTERN = re.compile(r'^Answer:\s*([A-D])\s*$', re.IGNORECASE)
+    EXPLANATION_PATTERN = re.compile(r'^Explanation:\s*(.*)$', re.IGNORECASE)
     
     def __init__(self, text: str):
         """Initialize parser with text content"""
@@ -224,6 +227,56 @@ class QuestionParser:
                 message=f'Answer must be A, B, C, or D (got {correct_answer})',
                 line=start_line + 1
             ))
+
+        explanation = None
+        while self.current_line < len(self.lines):
+            line = self.lines[self.current_line].strip()
+
+            if not line:
+                self.current_line += 1
+                continue
+
+            if self.QUESTION_NUMBER_PATTERN.match(line):
+                break
+
+            explanation_match = self.EXPLANATION_PATTERN.match(line)
+            if explanation_match:
+                explanation_text = explanation_match.group(1).strip()
+                if not explanation_text:
+                    warnings.append(ValidationError(
+                        type='empty_explanation',
+                        message='Explanation field is empty',
+                        line=self.current_line + 1
+                    ))
+                    self.current_line += 1
+                    break
+
+                explanation_lines = [explanation_text]
+                self.current_line += 1
+
+                while self.current_line < len(self.lines):
+                    next_line = self.lines[self.current_line].strip()
+
+                    if not next_line:
+                        self.current_line += 1
+                        continue
+
+                    if self.QUESTION_NUMBER_PATTERN.match(next_line):
+                        break
+
+                    explanation_lines.append(next_line)
+                    self.current_line += 1
+
+                explanation = ' '.join(explanation_lines).strip()
+                if len(explanation) > 1000:
+                    warnings.append(ValidationError(
+                        type='explanation_too_long',
+                        message=f'Explanation exceeds 1000 characters ({len(explanation)} chars)',
+                        line=self.current_line + 1
+                    ))
+                break
+
+            break
         
         # Create parsed question
         return ParsedQuestion(
@@ -234,6 +287,7 @@ class QuestionParser:
             option_c=options.get('C', ''),
             option_d=options.get('D', ''),
             correct_answer=correct_answer,
+            explanation=explanation,
             errors=errors,
             warnings=warnings
         )
