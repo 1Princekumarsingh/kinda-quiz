@@ -87,21 +87,23 @@ export default function SubjectFormModal({
       onClose={onClose}
       title={mode === 'create' ? 'Create New Subject' : 'Edit Subject'}
     >
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <Input
-          label="Subject Name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="e.g., Data Structures & Algorithms"
-          error={error}
-          required
-          autoFocus
-          disabled={isSubmitting}
-          maxLength={200}
-        />
+      <form onSubmit={handleSubmit} className="space-y-4 lg:mx-auto lg:max-w-[600px]">
+        <div className="grid gap-4 lg:grid-cols-1">
+          <Input
+            label="Subject Name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="e.g., Data Structures & Algorithms"
+            error={error}
+            required
+            autoFocus
+            disabled={isSubmitting}
+            maxLength={200}
+          />
+        </div>
 
-        <div className="flex justify-end space-x-3 pt-4">
+        <div className="flex justify-end gap-3 pt-4 md:gap-4">
           <button
             type="button"
             onClick={onClose}

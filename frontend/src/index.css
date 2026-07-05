@@ -78,6 +78,13 @@ video {
     min-width: 44px;
   }
 
+  @media (min-width: 768px) {
+    .touch-target {
+      min-height: 48px;
+      min-width: 48px;
+    }
+  }
+
   .touch-target-sm {
     min-height: 40px;
     min-width: 40px;

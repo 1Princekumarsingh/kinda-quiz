@@ -148,9 +148,10 @@ export default function QuizConfigModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Configure Quiz">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Quiz Mode */}
-        <div>
+      <form onSubmit={handleSubmit} className="space-y-6 lg:mx-auto lg:max-w-[600px]">
+        <div className="grid gap-4 lg:grid-cols-2">
+          {/* Quiz Mode */}
+          <div className="lg:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-3">
             Quiz Mode
           </label>
@@ -190,8 +191,8 @@ export default function QuizConfigModal({
           </div>
         </div>
 
-        {/* Timer Mode */}
-        <div>
+          {/* Timer Mode */}
+          <div className="lg:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-3">
             Timer Mode
           </label>
@@ -257,8 +258,8 @@ export default function QuizConfigModal({
           </div>
         </div>
 
-        {/* Question Selection */}
-        <div>
+          {/* Question Selection */}
+          <div className="lg:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-3">
             Question Selection
           </label>
@@ -395,15 +396,15 @@ export default function QuizConfigModal({
           </div>
         </div>
 
-        {/* Batch Size */}
-        <div>
+          {/* Batch Size */}
+          <div className="lg:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-3">
             Batch Size
           </label>
           <select
             value={batchSize}
             onChange={(e) => setBatchSize(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full min-h-[44px] px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option value={10}>10 questions</option>
             <option value={25}>25 questions</option>
@@ -416,18 +417,18 @@ export default function QuizConfigModal({
         </div>
 
         {/* Action Buttons */}
-        <div className="sticky bottom-0 -mx-6 -mb-6 flex justify-end space-x-3 border-t bg-white px-6 py-4">
+        <div className="sticky bottom-0 -mx-6 -mb-6 flex justify-end gap-3 border-t bg-white px-6 py-4 md:gap-4 lg:col-span-2">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+            className="min-h-[44px] px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={questionSelection === 'range' && !!rangeError}
-            className={`px-6 py-2 rounded-lg transition-colors font-medium ${
+            className={`min-h-[44px] px-6 py-2 rounded-lg transition-colors font-medium ${
               questionSelection === 'range' && rangeError
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 : 'bg-primary-600 text-white hover:bg-primary-700'
@@ -436,6 +437,7 @@ export default function QuizConfigModal({
             Start Quiz
           </button>
         </div>
+      </div>
       </form>
     </Modal>
   )

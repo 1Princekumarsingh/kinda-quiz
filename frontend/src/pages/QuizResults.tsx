@@ -177,17 +177,17 @@ export default function QuizResults() {
   // Summary View (existing code)
   return (
     <div className="min-h-screen bg-gray-50 py-8 animate-fade-in">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Quiz Results</h1>
+        <div className="mb-8 text-center lg:mb-10">
+          <h1 className="text-3xl font-bold text-gray-900 lg:text-4xl">Quiz Results</h1>
           <p className="mt-2 text-gray-600">Here's how you performed</p>
         </div>
 
         {/* Score Summary Card */}
-        <section aria-labelledby="quiz-results-summary" className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+        <section aria-labelledby="quiz-results-summary" className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm lg:rounded-2xl">
           {/* Large Score Display with Circular Progress */}
-          <div className="px-6 py-12 text-center" id="quiz-results-summary">
+          <div className="px-6 py-12 text-center lg:px-8 lg:py-14" id="quiz-results-summary">
             <CircularProgress 
               percentage={metrics.accuracyPercentage}
               label="Accuracy"
@@ -207,10 +207,10 @@ export default function QuizResults() {
           </div>
 
           {/* Metrics Grid */}
-          <div className="p-4 md:p-6">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
+          <div className="p-4 md:p-6 lg:p-8">
+            <div className="mb-6 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4 lg:gap-5">
               {/* Total Questions */}
-              <div className="text-center p-3 md:p-4 bg-gray-50 rounded-lg border-2 border-gray-200 hover:border-gray-300 transition-all duration-200 transform hover:scale-105 hover:shadow-md">
+              <div className="rounded-lg border-2 border-gray-200 bg-gray-50 p-3 text-center transition-all duration-200 hover:scale-[1.01] hover:border-gray-300 hover:shadow-md md:p-4 lg:p-4">
                 <div className="text-2xl font-bold text-gray-900 md:text-3xl" aria-label={`Total questions: ${metrics.totalQuestions}`}>
                   {metrics.totalQuestions}
                 </div>
@@ -220,7 +220,7 @@ export default function QuizResults() {
               </div>
 
               {/* Correct Answers */}
-              <div className="text-center p-3 md:p-4 bg-green-50 rounded-lg border-2 border-green-200 hover:border-green-300 transition-all duration-200 transform hover:scale-105 hover:shadow-md">
+              <div className="rounded-lg border-2 border-green-200 bg-green-50 p-3 text-center transition-all duration-200 hover:scale-[1.01] hover:border-green-300 hover:shadow-md md:p-4 lg:p-4">
                 <div className="text-2xl font-bold text-green-700 md:text-3xl" aria-label={`Correct answers: ${metrics.correctAnswers}`}>
                   {metrics.correctAnswers}
                 </div>
@@ -230,7 +230,7 @@ export default function QuizResults() {
               </div>
 
               {/* Wrong Answers */}
-              <div className="text-center p-3 md:p-4 bg-red-50 rounded-lg border-2 border-red-200 hover:border-red-300 transition-all duration-200 transform hover:scale-105 hover:shadow-md">
+              <div className="rounded-lg border-2 border-red-200 bg-red-50 p-3 text-center transition-all duration-200 hover:scale-[1.01] hover:border-red-300 hover:shadow-md md:p-4 lg:p-4">
                 <div className="text-2xl font-bold text-red-700 md:text-3xl" aria-label={`Wrong answers: ${metrics.wrongAnswers}`}>
                   {metrics.wrongAnswers}
                 </div>
@@ -240,7 +240,7 @@ export default function QuizResults() {
               </div>
 
               {/* Unanswered */}
-              <div className="text-center p-3 md:p-4 bg-yellow-50 rounded-lg border-2 border-yellow-200 hover:border-yellow-300 transition-all duration-200 transform hover:scale-105 hover:shadow-md">
+              <div className="rounded-lg border-2 border-yellow-200 bg-yellow-50 p-3 text-center transition-all duration-200 hover:scale-[1.01] hover:border-yellow-300 hover:shadow-md md:p-4 lg:p-4">
                 <div className="text-2xl font-bold text-yellow-700 md:text-3xl" aria-label={`Unanswered questions: ${metrics.unansweredQuestions}`}>
                   {metrics.unansweredQuestions}
                 </div>

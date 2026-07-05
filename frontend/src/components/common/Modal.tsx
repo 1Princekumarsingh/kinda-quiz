@@ -68,13 +68,13 @@ export default function Modal({
   if (!isOpen) return null
 
   const sizeClasses = {
-    sm: 'max-w-sm rounded-2xl',
-    md: 'max-w-lg rounded-2xl',
-    lg: 'max-w-2xl rounded-2xl',
+    sm: 'lg:max-w-[400px]',
+    md: 'lg:max-w-[600px]',
+    lg: 'lg:max-w-[800px]',
     full: 'w-full h-full max-h-screen rounded-none',
   }
 
-  const isFullScreen = size === 'full' || typeof window !== 'undefined' && window.innerWidth < 768
+  const isFullScreen = size === 'full' || (typeof window !== 'undefined' && window.innerWidth < 768)
 
   return (
     <div className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto bg-black/40 p-0 animation-pulse sm:items-center sm:p-4 animate-fade-in" onClick={() => { if (!preventClose) onClose() }}>
@@ -83,11 +83,11 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`my-0 flex max-h-screen w-full flex-col overflow-hidden bg-white shadow-2xl animate-modal-open sm:my-0 ${isFullScreen ? 'h-full max-w-none' : `${sizeClasses[size]} max-h-[calc(100vh-2rem)]`}`}
+        className={`my-0 flex max-h-screen w-full flex-col overflow-hidden bg-white shadow-2xl animate-modal-open sm:my-0 ${isFullScreen ? 'h-full max-w-none' : `md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[90%] md:rounded-lg md:shadow-xl md:max-h-[90vh] lg:w-auto ${sizeClasses[size]} max-h-[calc(100vh-2rem)]`}`}
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex flex-shrink-0 items-center justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
-          <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+          <h2 className="text-lg font-semibold leading-tight text-gray-900 md:text-xl lg:text-2xl">{title}</h2>
           {showCloseButton ? (
             <button
               type="button"

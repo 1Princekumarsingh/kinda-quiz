@@ -89,8 +89,8 @@ export default function Subjects() {
 
   return (
     <PhoneFrame>
-      <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="mx-auto w-full max-w-6xl space-y-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Subjects</h1>
           {subjectsData && (
@@ -111,7 +111,7 @@ export default function Subjects() {
       </div>
 
       {isLoading ? (
-        <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }} gap="md">
+        <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }} gap="md" className="lg:items-stretch">
           {[1, 2, 3].map((i) => (
             <div key={i} className="bg-white rounded-lg border border-gray-200 p-6 animate-pulse">
               <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
@@ -123,7 +123,7 @@ export default function Subjects() {
           ))}
         </ResponsiveGrid>
       ) : subjectsData?.data.length === 0 ? (
-        <div className="bg-white p-12 rounded-lg shadow-sm border border-gray-200 text-center">
+        <div className="mx-auto max-w-[768px] rounded-2xl border border-gray-200 bg-white p-12 text-center shadow-sm">
           <svg
             className="w-16 h-16 mx-auto text-gray-400 mb-4"
             fill="none"
@@ -147,7 +147,7 @@ export default function Subjects() {
           </button>
         </div>
       ) : (
-        <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }} gap="md">
+        <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }} gap="md" className="lg:items-stretch">
           {subjectsData?.data.map((subject) => (
             <SubjectCard
               key={subject.id}

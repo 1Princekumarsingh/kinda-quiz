@@ -1,5 +1,19 @@
 import { useEffect, useState } from 'react'
 
+function scheduleBreakpointUpdate(callback: () => void) {
+  if (typeof window === 'undefined') {
+    callback()
+    return
+  }
+
+  if (typeof window.requestAnimationFrame === 'function') {
+    window.requestAnimationFrame(() => callback())
+    return
+  }
+
+  window.setTimeout(callback, 16)
+}
+
 /**
  * Breakpoint definitions matching TailwindCSS defaults
  * Mobile: 320px - 767px (default, no prefix)
@@ -58,26 +72,47 @@ export function useBreakpoint(): Breakpoint {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
+    let rafId: number | null = null
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+
     const handleResize = () => {
-      const newBreakpoint = getCurrentBreakpoint()
-      setBreakpoint(newBreakpoint)
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
+
+      rafId = window.requestAnimationFrame(() => {
+        setBreakpoint(getCurrentBreakpoint())
+        rafId = null
+      })
     }
 
-    // Debounce resize events for performance (300ms as per requirement 1.6)
-    let timeoutId: ReturnType<typeof setTimeout>
     const debouncedResize = () => {
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(handleResize, 50) // Small delay for smoother updates
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId)
+      }
+
+      timeoutId = window.setTimeout(() => {
+        handleResize()
+        timeoutId = null
+      }, 50)
+    }
+
+    const handleOrientationChange = () => {
+      scheduleBreakpointUpdate(() => setBreakpoint(getCurrentBreakpoint()))
     }
 
     window.addEventListener('resize', debouncedResize)
-    window.addEventListener('orientationchange', handleResize)
+    window.addEventListener('orientationchange', handleOrientationChange)
 
-    // Cleanup
     return () => {
-      clearTimeout(timeoutId)
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId)
+      }
       window.removeEventListener('resize', debouncedResize)
-      window.removeEventListener('orientationchange', handleResize)
+      window.removeEventListener('orientationchange', handleOrientationChange)
     }
   }, [])
 

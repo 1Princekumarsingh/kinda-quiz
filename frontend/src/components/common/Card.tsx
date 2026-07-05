@@ -24,11 +24,13 @@ export default function Card({
     flat: 'border-transparent bg-transparent shadow-none',
   }
   const paddingClasses = {
-    sm: 'p-4',
-    md: 'p-5',
-    lg: 'p-6',
+    sm: 'p-4 md:p-4 lg:p-3 xl:p-3',
+    md: 'p-5 md:p-5 lg:p-4 xl:p-4',
+    lg: 'p-6 md:p-6 lg:p-4 xl:p-4',
   }
-  const interactiveClasses = hoverable ? 'cursor-pointer hover:scale-105 hover:shadow-elevated-hover active:scale-95 transform' : ''
+  const interactiveClasses = hoverable
+    ? 'cursor-pointer lg:hover:scale-[1.02] lg:hover:shadow-elevated-hover active:scale-95 transform xl:hover:scale-[1.03]'
+    : ''
   const interactiveAttrs = onClick ? { role: 'button', tabIndex: 0, onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); onClick() } } } : {}
 
   return (

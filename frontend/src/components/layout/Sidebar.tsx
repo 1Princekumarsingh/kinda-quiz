@@ -9,7 +9,7 @@ const navigation = [
 
 export default function Sidebar() {
   return (
-    <aside aria-label="Sidebar navigation" className="w-full bg-white border-b border-gray-200 md:w-64 md:min-h-[calc(100vh-4rem)] md:border-r md:border-b-0">
+    <aside aria-label="Sidebar navigation" className="hidden md:block w-full bg-white border-b border-gray-200 md:w-64 md:min-h-[calc(100vh-4rem)] md:border-r md:border-b-0">
       <nav aria-label="Primary" className="space-y-1 p-4 md:sticky md:top-16">
         {navigation.map((item) => (
           <NavLink

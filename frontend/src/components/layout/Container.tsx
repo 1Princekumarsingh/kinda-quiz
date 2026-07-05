@@ -58,13 +58,13 @@ export function Container({
   className = '',
   as: Component = 'div',
 }: ContainerProps) {
-  // Map size prop to Tailwind max-width classes
+  // Map size prop to Tailwind max-width classes for desktop and tablet viewports
   const maxWidthClasses = {
-    sm: 'max-w-screen-sm', // 640px
-    md: 'max-w-screen-md', // 768px
-    lg: 'max-w-screen-lg', // 1024px
-    xl: 'max-w-screen-xl', // 1280px
-    full: 'max-w-full',
+    sm: 'max-w-full lg:max-w-[640px] xl:max-w-[640px]',
+    md: 'max-w-full lg:max-w-[768px] xl:max-w-[960px]',
+    lg: 'max-w-full lg:max-w-[1024px] xl:max-w-[1200px]',
+    xl: 'max-w-full lg:max-w-[1280px] xl:max-w-[1400px]',
+    full: 'max-w-full lg:max-w-none xl:max-w-none',
   }
 
   return (
@@ -72,9 +72,12 @@ export function Container({
       className={`
         w-full
         mx-auto
+        lg:mx-auto
         ${maxWidthClasses[size]}
-        px-4 md:px-6 lg:px-8
+        px-4 md:px-6 md:landscape:px-5 lg:px-8 xl:px-10
         overflow-x-hidden
+        transition-all duration-200
+        lg:mx-auto
         ${className}
       `.trim()}
     >

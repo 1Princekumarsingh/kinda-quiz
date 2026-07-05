@@ -114,6 +114,28 @@ describe('useBreakpoint', () => {
     // orientationchange should trigger immediate update without debounce
   })
 
+  it('should schedule breakpoint updates through requestAnimationFrame', () => {
+    const rafSpy = vi.fn((callback: FrameRequestCallback) => {
+      callback(0)
+      return 1
+    })
+
+    vi.stubGlobal('requestAnimationFrame', rafSpy)
+
+    const { result } = renderHook(() => useBreakpoint())
+
+    act(() => {
+      window.dispatchEvent(new Event('resize'))
+    })
+
+    act(() => {
+      vi.advanceTimersByTime(100)
+    })
+
+    expect(rafSpy).toHaveBeenCalled()
+    expect(result.current).toBe('desktop')
+  })
+
   it('should cleanup event listeners on unmount', () => {
     const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener')
 

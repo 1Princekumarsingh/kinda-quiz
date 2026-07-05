@@ -22,7 +22,9 @@ describe('Container', () => {
     )
 
     const containerElement = container.firstChild as HTMLElement
-    expect(containerElement).toHaveClass('max-w-screen-lg')
+    expect(containerElement).toHaveClass('max-w-full')
+    expect(containerElement).toHaveClass('lg:max-w-[1024px]')
+    expect(containerElement).toHaveClass('lg:mx-auto')
   })
 
   it('should apply sm size', () => {
@@ -33,7 +35,8 @@ describe('Container', () => {
     )
 
     const containerElement = container.firstChild as HTMLElement
-    expect(containerElement).toHaveClass('max-w-screen-sm')
+    expect(containerElement).toHaveClass('max-w-full')
+    expect(containerElement).toHaveClass('lg:max-w-[640px]')
   })
 
   it('should apply md size', () => {
@@ -44,7 +47,8 @@ describe('Container', () => {
     )
 
     const containerElement = container.firstChild as HTMLElement
-    expect(containerElement).toHaveClass('max-w-screen-md')
+    expect(containerElement).toHaveClass('max-w-full')
+    expect(containerElement).toHaveClass('lg:max-w-[768px]')
   })
 
   it('should apply xl size', () => {
@@ -55,7 +59,8 @@ describe('Container', () => {
     )
 
     const containerElement = container.firstChild as HTMLElement
-    expect(containerElement).toHaveClass('max-w-screen-xl')
+    expect(containerElement).toHaveClass('max-w-full')
+    expect(containerElement).toHaveClass('lg:max-w-[1280px]')
   })
 
   it('should apply full size', () => {

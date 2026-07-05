@@ -74,9 +74,9 @@ export function ResponsiveGrid({
 
   // Map gap size to Tailwind classes
   const gapClasses = {
-    sm: 'gap-4', // 16px
-    md: 'gap-6', // 24px
-    lg: 'gap-8', // 32px
+    sm: 'gap-4 md:gap-5 lg:gap-6 md:landscape:gap-6',
+    md: 'gap-6 md:gap-7 lg:gap-8 md:landscape:gap-6',
+    lg: 'gap-8 md:gap-9 lg:gap-10 md:landscape:gap-6',
   }
 
   // Build grid-cols classes for each breakpoint
@@ -89,6 +89,12 @@ export function ResponsiveGrid({
   // Desktop (lg:): 1024px+
   const desktopGridClass = `lg:grid-cols-${desktopCols}`
 
+  // Tablet landscape (md:landscape): use a desktop-style grid when the tablet is wide enough
+  const landscapeTabletGridClass = `md:landscape:grid-cols-${Math.min(Math.max(desktopCols, 3), 3)}`
+
+  // Wide desktop (xl:): 1280px+ adds one additional column, capped at 4
+  const wideDesktopGridClass = `xl:grid-cols-${Math.min(desktopCols + 1, 4)}`
+
   return (
     <Component
       className={`
@@ -96,6 +102,8 @@ export function ResponsiveGrid({
         ${mobileGridClass}
         ${tabletGridClass}
         ${desktopGridClass}
+        ${landscapeTabletGridClass}
+        ${wideDesktopGridClass}
         ${gapClasses[gap]}
         w-full
         ${className}

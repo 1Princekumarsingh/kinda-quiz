@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { statisticsApi } from '@/api/statistics'
 import { Link } from 'react-router-dom'
 import { PhoneFrame } from '@/components/layout'
+import { Container } from '@/components/layout/Container'
 import StatCard from '@/components/dashboard/StatCard'
 
 export default function Dashboard() {
@@ -20,8 +21,9 @@ export default function Dashboard() {
   const accuracyAccent = stats && stats.overall_accuracy >= 80 ? 'success' : stats && stats.overall_accuracy >= 60 ? 'warning' : 'error'
 
   return (
-    <PhoneFrame>
-      <div className="space-y-6 animate-fade-in">
+    <Container size="xl" className="py-1">
+      <PhoneFrame>
+        <div className="space-y-6 animate-fade-in">
         <header className="space-y-2">
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-600">Welcome back, {user?.username}!</p>
@@ -103,7 +105,8 @@ export default function Dashboard() {
             </section>
           </>
         )}
-      </div>
-    </PhoneFrame>
+        </div>
+      </PhoneFrame>
+    </Container>
   )
 }

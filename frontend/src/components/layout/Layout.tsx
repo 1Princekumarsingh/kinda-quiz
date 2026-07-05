@@ -11,7 +11,7 @@ export default function Layout() {
       <Navbar />
       <div className="flex flex-col md:flex-row">
         <Sidebar />
-        <main id="main-content" className="flex-1 px-4 py-4 sm:px-6 lg:px-8 lg:py-8" tabIndex={-1}>
+        <main id="main-content" className="flex-1 px-4 py-3 sm:px-6 lg:px-8 lg:py-5" tabIndex={-1}>
           <Container size="xl" className="py-1">
             <Outlet />
           </Container>

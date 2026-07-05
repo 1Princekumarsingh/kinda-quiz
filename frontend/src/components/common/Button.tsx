@@ -22,7 +22,7 @@ export default function Button({
   type = 'button',
   ...props
 }: ButtonProps) {
-  const baseClasses = 'inline-flex touch-target items-center justify-center rounded-xl font-medium transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 hover:scale-105 active:scale-95 transform'
+  const baseClasses = 'inline-flex touch-target items-center justify-center rounded-xl font-medium transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 hover:scale-105 active:scale-95 transform md:gap-1 md:px-4'
 
   const variantClasses = {
     primary: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 hover:shadow-elevated-hover',
@@ -32,9 +32,9 @@ export default function Button({
   }
 
   const sizeClasses = {
-    sm: 'min-h-8 px-3 py-1.5 text-sm',
-    md: 'min-h-10 px-4 py-2 text-sm',
-    lg: 'min-h-12 px-6 py-3 text-base',
+    sm: 'min-h-8 px-3 py-1.5 text-sm md:min-h-[44px] md:px-4 md:py-2',
+    md: 'min-h-10 px-4 py-2 text-sm md:min-h-[44px] md:px-5 md:py-2.5',
+    lg: 'min-h-12 px-6 py-3 text-base md:min-h-[48px] md:px-6 md:py-3',
   }
 
   const widthClass = fullWidth ? 'w-full' : ''

@@ -51,7 +51,7 @@ export default function ConfirmDialog({
             type="button"
             onClick={onClose}
             disabled={isLoading}
-            className="touch-target rounded-xl border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-150 hover:scale-105 active:scale-95 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:scale-100"
+            className="touch-target min-h-[44px] rounded-xl border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-150 hover:scale-105 active:scale-95 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:scale-100"
           >
             {cancelText}
           </button>
@@ -59,7 +59,7 @@ export default function ConfirmDialog({
             type="button"
             onClick={onConfirm}
             disabled={isLoading}
-            className={`touch-target rounded-xl px-4 py-2 text-sm font-medium transition-all duration-150 hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:scale-100 ${confirmClasses[confirmVariant]}`}
+            className={`touch-target min-h-[44px] rounded-xl px-4 py-2 text-sm font-medium transition-all duration-150 hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:scale-100 ${confirmClasses[confirmVariant]}`}
           >
             {isLoading ? 'Processing...' : confirmText}
           </button>

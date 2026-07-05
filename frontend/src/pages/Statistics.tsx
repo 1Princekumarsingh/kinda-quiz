@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { statisticsApi } from '@/api/statistics'
 import { ResponsiveGrid, PhoneFrame } from '@/components/layout'
+import { Container } from '@/components/layout/Container'
 
 export default function Statistics() {
   const { data: stats, isLoading, error } = useQuery({
@@ -30,27 +31,28 @@ export default function Statistics() {
   const studyMinutes = 0
 
   return (
-    <PhoneFrame>
-      <div className="space-y-6">
+    <Container size="xl" className="py-1">
+      <PhoneFrame>
+        <div className="space-y-6">
         <header className="space-y-2">
-          <h1 className="text-3xl font-bold text-gray-900">Statistics</h1>
-          <p className="text-sm text-gray-600">A snapshot of your progress and study focus.</p>
+          <h1 className="text-3xl font-bold text-gray-900 lg:text-4xl">Statistics</h1>
+          <p className="text-sm text-gray-600 lg:text-base">A snapshot of your progress and study focus.</p>
         </header>
 
-      <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }} gap="md">
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }} gap="md" className="lg:items-stretch">
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:p-7">
           <div className="text-sm font-medium text-gray-600">Total Study Time</div>
           <div className="text-3xl font-bold text-gray-900 mt-2">{studyHours}h {studyMinutes}m</div>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:p-7">
           <div className="text-sm font-medium text-gray-600">Questions Solved</div>
           <div className="text-3xl font-bold text-gray-900 mt-2">
             {stats?.completed_questions ?? 0}
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:p-7">
           <div className="text-sm font-medium text-gray-600">Overall Accuracy</div>
           <div className="text-3xl font-bold text-gray-900 mt-2">
             {stats && typeof stats.overall_accuracy === 'number'
@@ -60,9 +62,9 @@ export default function Statistics() {
         </div>
       </ResponsiveGrid>
 
-      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Question Status Distribution</h3>
-        <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 4 }} gap="sm">
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8 lg:p-8">
+        <h3 className="mb-4 text-lg font-semibold text-gray-900 lg:text-xl">Question Status Distribution</h3>
+        <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 4 }} gap="sm" className="lg:items-stretch">
           <div className="rounded-lg bg-gray-50 p-4 text-center">
             <span className="block text-sm text-gray-500">Total Questions</span>
             <span className="text-2xl font-bold text-gray-900">{stats?.total_questions ?? 0}</span>
@@ -82,6 +84,7 @@ export default function Statistics() {
         </ResponsiveGrid>
       </div>
     </div>
-  </PhoneFrame>
+      </PhoneFrame>
+    </Container>
   )
 }

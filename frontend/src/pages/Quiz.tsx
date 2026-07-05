@@ -475,11 +475,11 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
       {/* Main Content */}
       <div className="flex-1 overflow-auto bg-slate-50 pb-32 lg:pb-0">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-8">
             {/* Question Area */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 lg:max-w-[800px] lg:justify-self-center">
               <div
-                className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm sm:p-6 touch-manipulation select-none-safe"
+                className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm sm:p-6 md:p-7 lg:p-8 touch-manipulation select-none-safe"
                 style={transformStyle}
                 onTouchStart={(event) => {
                   longPressHandlers.onTouchStart(event)
@@ -501,7 +501,7 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
                   onPullCancel()
                 }}
               >
-                <div className="mb-4 flex items-center justify-between gap-3">
+                <div className="mb-4 flex items-start justify-between gap-3 lg:mb-6">
                   <div>
                     <div className="text-sm font-semibold uppercase tracking-wide text-slate-500">Current question</div>
                     <h2 className="text-xl font-semibold text-slate-900">
@@ -529,12 +529,12 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
                   </button>
                 </div>
 
-                <div className="mb-5 rounded-2xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-600">
+                <div className="mb-5 rounded-2xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-600 md:mb-6 md:p-4 lg:p-4">
                   <p>Swipe left or right to move between questions on mobile.</p>
                   <p className="mt-1 text-xs text-slate-500">Pull down to refresh questions and long press to open the palette.</p>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-3 md:space-y-4">
                   {isRefreshing && (
                     <div className="rounded-2xl border border-primary-200 bg-primary-50 p-3 text-sm text-primary-700 transition-all duration-200">
                       Refreshing questions...
@@ -588,7 +588,7 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
                         key={option.key}
                         onClick={() => handleSelectAnswer(option.key)}
                         disabled={shouldShowFeedback}
-                        className={`w-full min-h-[56px] rounded-2xl border-2 p-4 text-left transition-all duration-200 ${optionStyle} ${shouldShowFeedback ? 'cursor-default' : 'cursor-pointer'}`}
+                        className={`w-full min-h-[56px] rounded-2xl border-2 p-4 text-left transition-all duration-200 md:min-h-[48px] md:p-4 lg:min-h-[56px] ${optionStyle} ${shouldShowFeedback ? 'cursor-default' : 'cursor-pointer'}`}
                       >
                         <div className="flex items-start gap-3">
                           <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold ${circleStyle}`}>
@@ -705,7 +705,7 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
                       </div>
                     )}
                     
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex flex-col gap-3 sm:flex-row md:flex-row md:landscape:flex-row lg:gap-4">
                       <button
                         onClick={() => {
                           debounceClick(() => {
@@ -805,7 +805,7 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
             </div>
 
             {/* Question Palette (Desktop/Tablet) */}
-            <div className="hidden md:block">
+            <div className="hidden md:block md:landscape:block">
               <div className="sticky top-24">
                 <QuestionPalette
                   state={state}
@@ -824,7 +824,7 @@ function QuizSession({ config, chapterId, questions, totalQuestionCount, session
       </div>
 
       {/* Navigation Bar (Fixed Bottom on Desktop, Sticky on Mobile) */}
-      <div className="sticky lg:fixed bottom-0 left-0 right-0">
+      <div className="sticky lg:fixed lg:bottom-0 lg:left-0 lg:right-0">
         <QuizNavigationBar
           currentIndex={state.current_question_index}
           totalQuestions={state.questions.length}

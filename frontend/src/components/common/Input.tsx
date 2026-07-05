@@ -28,7 +28,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <div className="relative">
           <input
             ref={ref}
-            className={`w-full rounded-xl border px-3 py-3 text-base transition-all duration-150 focus:outline-none focus:scale-[1.01] focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 ${
+            className={`w-full rounded-xl border px-3 py-3 text-base transition-all duration-150 focus:outline-none focus:scale-[1.01] focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 md:min-h-[44px] md:px-4 md:py-3 ${
               error ? 'border-rose-500 bg-rose-50' : success ? 'border-emerald-500 bg-emerald-50' : 'border-slate-300 bg-white'
             } ${props.disabled ? 'cursor-not-allowed bg-slate-100' : 'bg-white'} ${className}`}
             aria-invalid={Boolean(error)}

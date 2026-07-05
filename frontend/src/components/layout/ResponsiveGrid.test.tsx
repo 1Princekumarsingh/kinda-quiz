@@ -41,6 +41,7 @@ describe('ResponsiveGrid', () => {
     expect(gridElement).toHaveClass('grid-cols-1')
     expect(gridElement).toHaveClass('md:grid-cols-2')
     expect(gridElement).toHaveClass('lg:grid-cols-4')
+    expect(gridElement).toHaveClass('xl:grid-cols-4')
   })
 
   it('should apply single column on all breakpoints', () => {
@@ -54,6 +55,18 @@ describe('ResponsiveGrid', () => {
     expect(gridElement).toHaveClass('grid-cols-1')
     expect(gridElement).toHaveClass('md:grid-cols-1')
     expect(gridElement).toHaveClass('lg:grid-cols-1')
+  })
+
+  it('should apply landscape-specific columns for tablet layouts', () => {
+    const { container } = render(
+      <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }}>
+        <div>Item</div>
+      </ResponsiveGrid>
+    )
+
+    const gridElement = container.firstChild as HTMLElement
+    expect(gridElement).toHaveClass('md:landscape:grid-cols-3')
+    expect(gridElement).toHaveClass('md:landscape:gap-6')
   })
 
   it('should apply default gap (md)', () => {
@@ -76,6 +89,8 @@ describe('ResponsiveGrid', () => {
 
     const gridElement = container.firstChild as HTMLElement
     expect(gridElement).toHaveClass('gap-4')
+    expect(gridElement).toHaveClass('md:gap-5')
+    expect(gridElement).toHaveClass('lg:gap-6')
   })
 
   it('should apply large gap', () => {
@@ -87,6 +102,8 @@ describe('ResponsiveGrid', () => {
 
     const gridElement = container.firstChild as HTMLElement
     expect(gridElement).toHaveClass('gap-8')
+    expect(gridElement).toHaveClass('md:gap-9')
+    expect(gridElement).toHaveClass('lg:gap-10')
   })
 
   it('should apply custom className', () => {
@@ -135,5 +152,6 @@ describe('ResponsiveGrid', () => {
     expect(gridElement).toHaveClass('grid-cols-1')
     expect(gridElement).toHaveClass('md:grid-cols-2')
     expect(gridElement).toHaveClass('lg:grid-cols-4')
+    expect(gridElement).toHaveClass('xl:grid-cols-4')
   })
 })

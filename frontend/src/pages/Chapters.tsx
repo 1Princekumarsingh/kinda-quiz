@@ -204,9 +204,9 @@ export default function Chapters() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto w-full max-w-6xl space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-start">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <button
             onClick={() => navigate('/subjects')}
@@ -237,7 +237,7 @@ export default function Chapters() {
 
       {/* Chapters Grid */}
       {isLoading ? (
-        <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }} gap="md">
+        <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }} gap="md" className="lg:items-stretch">
           {[1, 2, 3].map((i) => (
             <div key={i} className="bg-white rounded-lg border border-gray-200 p-6 animate-pulse">
               <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
@@ -249,7 +249,7 @@ export default function Chapters() {
           ))}
         </ResponsiveGrid>
       ) : chaptersData?.data.length === 0 ? (
-        <div className="bg-white p-12 rounded-lg shadow-sm border border-gray-200 text-center">
+        <div className="mx-auto max-w-[768px] rounded-2xl border border-gray-200 bg-white p-12 text-center shadow-sm">
           <svg
             className="w-16 h-16 mx-auto text-gray-400 mb-4"
             fill="none"
@@ -273,7 +273,7 @@ export default function Chapters() {
           </button>
         </div>
       ) : (
-        <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }} gap="md">
+        <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }} gap="md" className="lg:items-stretch">
           {chaptersData?.data.map((chapter) => (
             <ChapterCard
               key={chapter.id}
